@@ -88,7 +88,8 @@ lemma goodPrime_window_weight {n X A p : ℕ} (hX : 2 * X ≤ n)
     have hpk : p ≤ g i := by dsimp [g]; omega
     rw [primeWeight, if_pos hpk]
     have hfacr : (1 : ℝ) ≤ (n.choose (g i)).factorization p := by exact_mod_cast hfac
-    nlinarith [Real.log_nonneg (by exact_mod_cast hprime.one_lt.le)]
+    have hlp : 0 ≤ log (p : ℝ) := Real.log_nonneg (by exact_mod_cast hprime.one_lt.le)
+    nlinarith [hlp]
   calc
     (A : ℝ) * log p = ∑ k ∈ T, log (p : ℝ) := by
       simp [T, Finset.card_image_of_injective _ hinj]
@@ -128,4 +129,3 @@ theorem averaged_smallPrimePart_lower (n X A : ℕ) (hn : 0 < n) (hX : 2 * X ≤
       Finset.sum_le_sum fun k _ => goodPrime_sum_le_log n X A k
 
 end Erdos684
-

@@ -93,4 +93,3 @@ theorem frequently_smallPrimePart_eq_one :
   exact smallPrimePart_obstruction_eq_one K hkK
 
 end Erdos684
-

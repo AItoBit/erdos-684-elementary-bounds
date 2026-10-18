@@ -60,4 +60,3 @@ theorem exists_upper_constant :
   exact ⟨514, by norm_num, upper_bound⟩
 
 end Erdos684
-
