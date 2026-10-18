@@ -57,7 +57,7 @@ status:
     2e2ecb4734c3fda1fcbdbc633182c6ba209e7e80. Sharp APSSV26 constants, Bae's stronger lower theorem
     and an optimal-order characterization are outside this scope.
   sorry_count: 0
-  sorry_in_definitions: false
+  sorry_in_definitions: 0
   axioms: [propext, Classical.choice, Quot.sound]
 automation:
   methods:
