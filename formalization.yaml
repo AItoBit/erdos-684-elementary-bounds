@@ -1,0 +1,93 @@
+# Candidate metadata. Final build, axiom and mechanical verification facts are pending.
+version: v0.4
+project:
+  name: "Elementary bounds for Erdos problem 684"
+  description: >-
+    Let U(n,k) be the full prime-power part of the binomial coefficient n choose k
+    supported on primes at most k. For all sufficiently large n, there exists
+    k at most n with k at most 514(log n)^2 and U(n,k) greater than n squared.
+    For arbitrarily large n greater than one, U(n,k) equals one throughout
+    k at most (log n)/8. This independent Mathlib-only implementation adapts
+    the known residue averaging and prime-power obstruction of APSSV26 with
+    coarse Chebyshev constants. It does not formalize that paper's sharper
+    coefficients or Bae's stronger registered lower bound. The optimal order
+    remains open and no mathematical novelty is claimed.
+  authors: [AItoBit]
+  responsible_maintainers: [AItoBit]
+  license: Apache-2.0
+classification:
+  arxiv: [math.NT]
+  msc2020: [11B65, 11N05, 11A51]
+sources:
+  - title: "Short proofs in combinatorics and number theory"
+    authors:
+      - Boris Alexeev
+      - Moe Putterman
+      - Mehtaab Sawhney
+      - Mark Sellke
+      - Gregory Valiant
+    id: "https://arxiv.org/abs/2603.29961v2"
+    location: "Section 2, Theorem 2.1"
+    type: article
+    relationship: adapts
+    note: >-
+      The residue averaging strategy and prime-power obstruction are adapted
+      with weaker explicit constants 514 and 1/8. The paper attributes its
+      proofs to an internal OpenAI model; human authors digested and edited
+      the proofs. No source-author endorsement or participation is claimed.
+  - title: "Some unconventional problems in number theory"
+    authors: [Paul Erdos]
+    id: "https://doi.org/10.1007/BF01903382"
+    location: "Acta Math. Acad. Sci. Hungar. 33 (1979), 71-80; pages 74, 76 and 77"
+    type: article
+    relationship: background
+    note: "The original strict prime cutoff is replaced by the modern APSSV26 cutoff p <= k."
+related_formalizations:
+  - id: "https://github.com/jidodat/erdos684-lean/tree/4543ff7764f9e8f1b2732a8464d5c19c945bfc52"
+    relationship: independent
+    note: >-
+      Ji Ho Bae's development, registered as PALOMAR-2026-09-03-000006,
+      formalizes arXiv:2604.23784v3 and proves a stronger subsequential lower
+      bound, including unbounded f(n)/log n. No code or theorem from that
+      development is imported here; no underlying author role is claimed.
+status:
+  scope: >-
+    Complete proofs are intended for the two stated coarse bounds, with final
+    build and axiom reports pending. Sharp APSSV26 constants, Bae's stronger
+    lower theorem and an optimal-order characterization are outside this scope.
+  # Add final sorry_count, sorry_in_definitions, axioms and main_results only
+  # from the verified final source snapshot. The deliberate Challenge holes
+  # are excluded from proof-development sorry counts.
+automation:
+  methods:
+    - method: agent
+      framework: Codex desktop
+      tool_setup: >-
+        Codex agents generated the independent Lean implementation and
+        documentation. A separate source-audit agent reviewed all eight
+        supplied forum images, APSSV26 v2 and the mathematical proof architecture.
+  notes: >-
+    AItoBit directed the task and confirmed the public name and responsibility
+    as human project maintainer. Human project attribution records direction
+    and responsibility, not manual generation or independent human checking
+    of the proof. Agent contributions are disclosed here. No human expert
+    review, source-author participation or endorsement is claimed.
+review:
+  status: agent-reviewed
+  notes: >-
+    Independent mathematical review found the residue-window injection and
+    the constants 1984 versus 1028 sufficient for the upper bound. The lower
+    obstruction uses log(lcmUpto K times primorial K) at most 8K and an
+    unbounded sequence of predecessor inputs. FIDELITY.txt and SOURCES.md
+    record exact correspondence and reading limits. Final compiler,
+    Comparator and independent-kernel checks must be reported separately.
+fidelity:
+  divergences: >-
+    Uses the modern non-strict small-prime cutoff and full multiplicities.
+    Replaces APSSV26's sharp PNT-based constants by weaker elementary
+    Chebyshev constants. States direct witness and obstruction assertions
+    rather than assigning a default value to an undefined small-input minimum.
+acknowledgements: >-
+  Alexeev, Putterman, Sawhney, Sellke and Valiant supplied the cited source,
+  which credits an internal OpenAI model for its proofs. Ji Ho Bae supplied
+  a separate stronger lower-bound development. Mathlib supplies the library.

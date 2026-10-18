@@ -1,0 +1,130 @@
+ERDOS 684: INDEPENDENT MATHEMATICAL AND SOURCE AUDIT
+18 October 2026
+
+Scope
+-----
+This audit concerns Finite.lean, BadPrimes.lean, Averaging.lean,
+Analytic.lean, Finish.lean and Lower.lean in research/erdos684.
+It is a mathematical and statement audit, not a compilation certificate.
+Compiler and axiom reports for the final snapshot must be recorded separately.
+
+Two key verdicts
+----------------
+1. The finite weighted averaging argument is mathematically correct. The
+   proposed elementary estimates yield the uniform eventual upper bound with
+   constant 514, without assuming the prime number theorem.
+2. The prime-power obstruction and elementary Chebyshev estimates yield the
+   infinitely-often lower obstruction with coefficient 1/8. This is an
+   infinite-sequence assertion, not an eventual lower bound for all inputs.
+
+Exact source-to-Lean contract
+-----------------------------
+smallPrimePart n k is the product over primes p <= k of
+  p ^ ((n.choose k).factorization p).
+It includes full prime-power multiplicity. It is not a squarefree kernel.
+The non-strict cutoff matches the modern problem page and APSSV26 Section 2.
+The original Erdos article's printed page 74 uses a strict p < k cutoff;
+the modern convention is an explicit difference, documented in SOURCES.md.
+
+upper_bound asserts:
+  for all sufficiently large natural n, there exists a natural k <= n with
+  (k : Real) <= 514 * (log n)^2 and n^2 < smallPrimePart n k.
+The eventual threshold is absolute, independent of n and the selected k.
+The proof actually chooses k >= 1. Its public existential need not state
+that separately: for positive n, k = 0 cannot satisfy the strict threshold.
+
+frequently_smallPrimePart_eq_one asserts:
+  for arbitrarily large natural n, n > 1 and for every natural k,
+  (k : Real) <= log n / 8 implies smallPrimePart n k = 1.
+On the constructed inputs the relevant k also satisfy k <= n. Since n > 1,
+the value 1 is strictly below n^2, so no such k is an upper-bound witness.
+
+These direct assertions avoid defining the minimum f(n) on small inputs
+where its defining set can be empty. If f is defined for a large input,
+the first theorem bounds it from above and the second bounds it from below
+on the indicated infinite family. They establish the known qualitative
+orders O(log^2 n) above and Omega(log n) infinitely often below. They do not
+prove f(n) = Theta(log n), an asymptotic formula, or unbounded f(n)/log n.
+
+APSSV26 Theorem 2.1 has stronger constants: upper coefficient
+24/(pi^2-6) + o(1), and infinite-sequence lower coefficient 1/2 + o(1).
+Those sharper constants are NOT claimed here. The current independent
+implementation adapts the same residue strategy with coarse Chebyshev
+constants. Its weaker explicit constants are deliberate, not a missing
+hypothesis hidden in the public statements. No new mathematical discovery
+is claimed. Cite Alexeev, Putterman, Sawhney, Sellke and Valiant and the
+paper's attribution of its proofs to an internal OpenAI model.
+
+Upper argument audit
+--------------------
+Let L = log n, X = ceil(256 L^2), and A = ceil(32 L).
+The analytic parameter lemma arranges, uniformly for all sufficiently large n:
+  L >= 1, n > 0, 2X <= n, A <= n,
+  32L <= A <= 33L, 256L^2 <= X <= 257L^2,
+  log(n+A) <= 2L, theta(X) >= X/2, and 2X <= 514L^2.
+All ceilings are controlled by their unit rounding error. The inequalities
+L/n -> 0 and L^2/n -> 0 make the natural-number window admissible.
+Chebyshev.theta_ge' gives theta(x) >= x/2 eventually because its main
+coefficient is log 2 > 1/2 and its logarithmic/square-root errors are o(x).
+
+Partition primes p <= X into bad primes with p - n%p <= A and good primes
+with A < p - n%p. For every bad prime the positive gap
+j = p - n%p belongs to [1,A], and p divides n+j. Since the bad primes are
+distinct, their product divides the positive product of n+1,...,n+A.
+Taking logarithms gives bad weight <= A log(n+A), including A = 0.
+Thus good weight >= theta(X) - A log(n+A).
+
+For a fixed good prime p put r = n%p. For each i in [1,A] take
+  k = p + r + i.
+The strict good-prime condition ensures r+i < p, hence
+  k%p = r+i > r, and p <= k < 2p <= 2X <= n.
+The first-level carry therefore gives binomial valuation at least one.
+The map i -> k is injective, so this prime contributes at least A log p
+over the full window [1,2X]. Distinct primes can contribute at the same k;
+their weights add and do not require disjoint k-windows. primeWeight has
+an explicit p <= k guard, preventing primes above the small-factor cutoff
+from being counted. Swapping the finite sums and discarding nonnegative
+unused weights gives
+  A(theta(X) - A log(n+A)) <= sum_{1 <= k <= 2X} log(smallPrimePart n k).
+
+The explicit numerical margin is:
+  theta(X) >= 128L^2,
+  A log(n+A) <= 66L^2,
+  A(theta(X) - A log(n+A)) >= 32L * 62L^2 = 1984L^3,
+whereas 4XL <= 1028L^3.
+Since L >= 1, the inequality is strict in the required direction.
+If every window term had smallPrimePart <= n^2, positivity and logarithm
+monotonicity would give each log term <= 2L. There are 2X terms, so their
+sum would be <= 4XL, contradicting the averaging bound. Some admissible
+k therefore has smallPrimePart > n^2 and k <= 514L^2.
+
+Lower argument audit
+--------------------
+For K > 2 let M = lcmUpto(K) * primorial(K), and n = M-1.
+For each prime p <= K, lcmUpto(K) contains p^(Nat.log p K), while the
+primorial contributes one further p. Hence p^(Nat.log p K + 1) divides M
+and is strictly larger than K.
+For every k <= K, comparison of residues modulo every power of such a p
+rules out all carries in the binomial coefficient (M-1).choose k.
+All its relevant prime valuations vanish, giving smallPrimePart n k = 1.
+This uses the corrected non-strict comparison p^e-1 >= K, including its
+possible equality case. No assertion about primes above K is needed.
+
+The exact identities log M = psi(K) + theta(K), and Mathlib's elementary
+bounds psi(K) <= (log 4 + 4)K and theta(K) <= (log 4)K, give
+  log M <= (2 log 4 + 4)K <= 8K.
+Consequently log n / 8 <= K, and the finite obstruction covers the whole
+claimed logarithmic window. The elementary primorial inequality gives
+K < M, so n >= K. Taking K larger than an arbitrary natural cutoff proves
+the required unboundedness of the constructed n, not just repeated use of
+one example. The condition n > 1 makes its obstruction nondegenerate.
+
+Limits of this audit
+--------------------
+The source reading record is in SOURCES.md. The inspected current Lean
+drafts implement the mathematics described above. This audit found no
+mathematical gap or quantifier weakening relative to the two frozen coarse
+bounds. It does not assert that every inspected draft has compiled; Lean
+elaboration, warning checks, axiom inspection, statement comparison and
+independent-kernel replay remain separate evidence for the final snapshot.
+No source code was edited and no compiler was run for this audit.

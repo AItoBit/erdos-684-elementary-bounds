@@ -1,0 +1,10 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "definition_names": ["Erdos684.smallPrimePart"],
+  "theorem_names": [
+    "Erdos684.upper_bound",
+    "Erdos684.frequently_smallPrimePart_eq_one"
+  ],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

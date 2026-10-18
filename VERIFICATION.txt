@@ -1,0 +1,6 @@
+Candidate package: verification in progress.
+Finite.lean, BadPrimes.lean and Analytic.lean passed on Lean4.33.1 with warnings
+as errors. The finite averaging and final composition still require checking.
+No full proof, registry acceptance or optimal-order solution is claimed here.
+LinuxCI checks the independently ported Lean4.35rc2 development and final axioms.
+Challenge deliberately contains two comparison holes and is not imported by Solution.
