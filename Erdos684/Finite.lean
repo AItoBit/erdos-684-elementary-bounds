@@ -87,13 +87,13 @@ theorem carry_prime_product_le (n k : ℕ) (hkn : k ≤ n) :
   let s := (Nat.primesLE k).filter (fun p => n % p < k % p)
   calc
     (∏ p ∈ s, p) ≤ ∏ p ∈ s, p ^ ((n.choose k).factorization p) := by
-      apply Finset.prod_le_prod'
+      apply Finset.prod_le_prod
       intro p hp
       obtain ⟨hpk, hmod⟩ := Finset.mem_filter.mp hp
       exact Nat.le_self_pow (Nat.ne_of_gt
         (factorization_choose_pos_of_mod_lt (Nat.prime_of_mem_primesLE hpk) hkn hmod)) p
     _ ≤ smallPrimePart n k := by
-      apply Finset.prod_le_prod_of_subset_of_one_le' (Finset.filter_subset _ _)
+      apply Finset.prod_le_prod_of_subset_of_one_le (Finset.filter_subset _ _)
       intro p hp _
       exact Nat.one_le_iff_ne_zero.mpr (pow_ne_zero _ (Nat.prime_of_mem_primesLE hp).ne_zero)
 

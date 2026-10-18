@@ -86,7 +86,7 @@ lemma goodPrime_window_weight {n X A p : ℕ} (hX : 2 * X ≤ n)
     have hkn : g i ≤ n := (Finset.mem_Icc.mp (hT (Finset.mem_image.mpr ⟨i, by simp [hi1, hiA], rfl⟩))).2.trans hX
     have hfac := one_le_factorization_choose_of_mod_lt hprime hkn hmod
     have hpk : p ≤ g i := by dsimp [g]; omega
-    rw [primeWeight, if_pos hpk]
+    rw [primeWeight, ite_eq_left hpk]
     have hfacr : (1 : ℝ) ≤ (n.choose (g i)).factorization p := by exact_mod_cast hfac
     have hlp : 0 ≤ log (p : ℝ) := Real.log_nonneg (by exact_mod_cast hprime.one_lt.le)
     nlinarith [hlp]
