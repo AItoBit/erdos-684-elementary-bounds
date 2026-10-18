@@ -28,9 +28,9 @@ No proof from that development is imported here.
 
 See [the mathematical proof and attribution](README.txt),
 [source audit](SOURCES.md), [statement audit](FIDELITY.txt), and
-[verification status](VERIFICATION.txt). The final standalone build and
-axiom checks are pending; the source audit is a focused review, not a completed
-100-paper research campaign.
+[verification status](VERIFICATION.txt). Both final theorems passed the standalone build and axiom audit in
+[CI run 39101125950](https://github.com/AItoBit/erdos-684-elementary-bounds/actions/runs/39101125950).
+The source audit is a focused review; the 100-paper research campaign remains incomplete.
 
 The package pins Lean **4.35.0-rc2** and Mathlib commit
 `065356127b1dc0016f66b7283ce0ce2c4055aa55`.

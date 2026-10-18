@@ -52,12 +52,13 @@ related_formalizations:
       development is imported here; no underlying author role is claimed.
 status:
   scope: >-
-    Implements the two stated coarse bounds. Final standalone build and axiom
-    reports are pending. Sharp APSSV26 constants, Bae's stronger lower theorem
+    Complete proofs of the two stated coarse bounds passed the standalone build
+    and final axiom audit in CI run 39101125950 at commit
+    2e2ecb4734c3fda1fcbdbc633182c6ba209e7e80. Sharp APSSV26 constants, Bae's stronger lower theorem
     and an optimal-order characterization are outside this scope.
-  # Add final sorry_count, sorry_in_definitions, axioms and main_results only
-  # from the verified final source snapshot. The deliberate Challenge holes
-  # are excluded from proof-development sorry counts.
+  sorry_count: 0
+  sorry_in_definitions: false
+  axioms: [propext, Classical.choice, Quot.sound]
 automation:
   methods:
     - method: agent

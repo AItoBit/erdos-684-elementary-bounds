@@ -1,0 +1,21 @@
+{
+  "unique_valid_records": 3,
+  "cumulative_counts": {
+    "discovered": 3,
+    "screened": 3,
+    "full_text_reviewed": 2,
+    "used_in_proof": 1
+  },
+  "arxiv_cumulative_counts": {
+    "discovered": 2,
+    "screened": 2,
+    "full_text_reviewed": 1,
+    "used_in_proof": 1
+  },
+  "minimum_reviewed": 100,
+  "quota_scope": "all_unique_papers",
+  "remaining_to_minimum": 98,
+  "literature_complete": false,
+  "errors": [],
+  "qualification": "Recorded evidence only; actual reading, relevance, and theorem truth require review."
+}
