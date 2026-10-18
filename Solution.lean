@@ -30,7 +30,7 @@ theorem upper_bound :
   have hfinite := averaged_smallPrimePart_lower n (primeCutoff n) (windowLength n) hn0 hXn
   have hex : ∃ k ∈ Finset.Icc 1 (2 * primeCutoff n), n ^ 2 < smallPrimePart n k := by
     by_contra h
-    push_neg at h
+    push Not at h
     have hterm : ∀ k ∈ Finset.Icc 1 (2 * primeCutoff n),
         log (smallPrimePart n k : ℝ) ≤ 2 * log (n : ℝ) := by
       intro k hk

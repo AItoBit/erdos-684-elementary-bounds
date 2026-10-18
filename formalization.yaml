@@ -1,4 +1,4 @@
-# Candidate metadata. Final build, axiom and mechanical verification facts are pending.
+# Final standalone build, axiom and mechanical verification facts are pending.
 version: v0.4
 project:
   name: "Elementary bounds for Erdos problem 684"
@@ -52,9 +52,9 @@ related_formalizations:
       development is imported here; no underlying author role is claimed.
 status:
   scope: >-
-    Complete proofs are intended for the two stated coarse bounds, with final
-    build and axiom reports pending. Sharp APSSV26 constants, Bae's stronger
-    lower theorem and an optimal-order characterization are outside this scope.
+    Implements the two stated coarse bounds. Final standalone build and axiom
+    reports are pending. Sharp APSSV26 constants, Bae's stronger lower theorem
+    and an optimal-order characterization are outside this scope.
   # Add final sorry_count, sorry_in_definitions, axioms and main_results only
   # from the verified final source snapshot. The deliberate Challenge holes
   # are excluded from proof-development sorry counts.
@@ -72,6 +72,10 @@ automation:
     and responsibility, not manual generation or independent human checking
     of the proof. Agent contributions are disclosed here. No human expert
     review, source-author participation or endorsement is claimed.
+    The focused corpus has three discovered and screened works, two full-text
+    reviews and one proof source. The arXiv subset has two discovered, two
+    screened, one fully read and one used. The broader 100-paper research
+    quota has not been met; this is not a campaign-completion claim.
 review:
   status: agent-reviewed
   notes: >-

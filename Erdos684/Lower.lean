@@ -61,7 +61,6 @@ lemma log_obstructionModulus_le (K : ℕ) : log (obstructionModulus K : ℝ) ≤
     rw [show (4 : ℝ) = 2 ^ 2 by norm_num, Real.log_pow]
     have hlog2 := Real.log_le_sub_one_of_pos (by norm_num : (0 : ℝ) < 2)
     norm_num at hlog2 ⊢
-    norm_num at hlog2 ⊢
     linarith
   rw [obstructionModulus, Nat.cast_mul,
     Real.log_mul (Nat.cast_ne_zero.mpr (Nat.lcmUpto_ne_zero K))
@@ -95,5 +94,3 @@ theorem frequently_smallPrimePart_eq_one :
   exact smallPrimePart_obstruction_eq_one K hkK
 
 end Erdos684
-
-

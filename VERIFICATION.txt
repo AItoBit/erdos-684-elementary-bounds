@@ -1,6 +1,28 @@
-Candidate package: verification in progress.
-Finite.lean, BadPrimes.lean and Analytic.lean passed on Lean4.33.1 with warnings
-as errors. The finite averaging and final composition still require checking.
-No full proof, registry acceptance or optimal-order solution is claimed here.
-LinuxCI checks the independently ported Lean4.35rc2 development and final axioms.
-Challenge deliberately contains two comparison holes and is not imported by Solution.
+VERIFICATION STATUS
+
+Scope: the known upper bound with constant 514 and the infinite-family
+lower obstruction with coefficient 1/8. No sharp-constant or optimal-growth
+claim is made.
+
+Configured standalone toolchain:
+  Lean 4.35.0-rc2
+  Mathlib 065356127b1dc0016f66b7283ce0ce2c4055aa55
+
+The Lean 4.33.1 baseline checks for Finite, BadPrimes, Analytic and Lower
+passed with warnings treated as errors. Baseline averaging and final
+composition checks remain pending. Those component checks do not establish
+that this standalone port builds or that its final theorem dependencies
+contain only the permitted standard axioms.
+
+Standalone verification is pending at:
+  https://github.com/AItoBit/erdos-684-elementary-bounds/actions/runs/39101014531
+Record the immutable source commit and final build and axiom evidence after
+that run completes. Do not infer a successful check from a workflow dispatch.
+
+Challenge.lean contains two deliberate theorem holes, excluded from proof
+development counts. Solution.lean does not import Challenge. The Comparator
+configuration compares Erdos684.smallPrimePart and the two declarations
+Erdos684.upper_bound and Erdos684.frequently_smallPrimePart_eq_one.
+
+Complete Palomar mechanical verification, independent-kernel replay,
+editorial review and registration are not established by this record.

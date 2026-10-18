@@ -1,7 +1,7 @@
 ELEMENTARY BOUNDS FOR ERDOS PROBLEM 684
 
-Proposed repository: AItoBit/erdos-684-elementary-bounds
-This is a draft public account. Final verification facts are pending.
+Repository: AItoBit/erdos-684-elementary-bounds
+Final standalone build and axiom checks are pending; see VERIFICATION.txt.
 
 Result
 ------
@@ -104,7 +104,10 @@ The eight supplied forum pages were read as images; the APSSV26 v2 HTML was
 read in full; relevant original Erdos pages were checked against the scan.
 The registry record of Bae's development was inspected. This account does
 not claim that its full Lean dependency closure was independently audited.
-No artificial paper-count or literature-coverage target is asserted.
+The focused corpus contains three discovered and screened works, two reviewed
+in full text, and one used in the proof. The arXiv subset has two discovered,
+two screened, one fully read and one used. The broader 100-paper research
+quota has not been met. This is not a claim of campaign completion.
 
 Production and responsibility
 -----------------------------
@@ -116,10 +119,10 @@ manual proof generation or human expert review. Source authors retain credit
 for their existing mathematical results. No source-author participation or
 endorsement is claimed.
 
-The proposed package uses Lean 4.35.0-rc2 with canonical Mathlib commit
+The package uses Lean 4.35.0-rc2 with canonical Mathlib commit
 065356127b1dc0016f66b7283ce0ce2c4055aa55 and no substantive external proof
-dependency. The proposed license for the independent implementation is
-Apache-2.0; it must match the actual root LICENSE. Challenge defines U
+dependency. The independent implementation is licensed under Apache-2.0.
+Challenge defines U
 identically and Comparator checks that definition and both result statements.
 Only actual final build, warning, axiom, Comparator and independent-kernel
 reports establish the corresponding verification claims. A local build or
